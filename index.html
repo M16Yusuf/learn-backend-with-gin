@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+  <script defer>
+
+    const req = new Request("http://127.0.0.1:8080/ping", {
+      method: "POST",
+      headers: {
+        "Content-type": "application/json",
+      },
+      body: {
+        data: 123,
+      }
+    });
+
+    fetch(req)
+      .then((res) => res.json())
+      .then((data) => console.log(data))
+      .catch((err) => console.log(err));
+
+  </script>
+</head>
+
+<body>
+  <p>
+    Lorem ipsum, dolor sit amet consectetur adipisicing elit. Eaque voluptate aliquam cupiditate ducimus assumenda
+    tempora, quisquam culpa ut labore tenetur obcaecati accusantium delectus sequi fugiat eius minus mollitia sunt!
+    Accusamus.
+  </p>
+  <p>
+    Lorem ipsum, dolor sit amet consectetur adipisicing elit. Eaque voluptate aliquam cupiditate ducimus assumenda
+    tempora, quisquam culpa ut labore tenetur obcaecati accusantium delectus sequi fugiat eius minus mollitia sunt!
+    Accusamus.
+  </p>
+  <p>
+    Lorem ipsum, dolor sit amet consectetur adipisicing elit. Eaque voluptate aliquam cupiditate ducimus assumenda
+    tempora, quisquam culpa ut labore tenetur obcaecati accusantium delectus sequi fugiat eius minus mollitia sunt!
+    Accusamus.
+  </p>
+</body>
+
+</html>
