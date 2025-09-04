@@ -1,0 +1,95 @@
+{
+    "swagger": "2.0",
+    "info": {
+        "description": "Restful API created using gin for koda batch 3",
+        "title": "KODA 3 GIN",
+        "contact": {},
+        "version": "1.0"
+    },
+    "host": "localhost:8080",
+    "paths": {
+        "/ping": {
+            "get": {
+                "tags": [
+                    "ping"
+                ],
+                "parameters": [
+                    {
+                        "type": "string",
+                        "description": "Header for send id",
+                        "name": "X-Request-ID",
+                        "in": "header",
+                        "required": true
+                    },
+                    {
+                        "type": "string",
+                        "description": "Header for ..",
+                        "name": "Content-Type",
+                        "in": "header",
+                        "required": true
+                    }
+                ],
+                "responses": {}
+            }
+        },
+        "/ping/:id/:param2": {
+            "get": {
+                "produces": [
+                    "application/json"
+                ],
+                "tags": [
+                    "ping"
+                ],
+                "parameters": [
+                    {
+                        "type": "integer",
+                        "description": "path params for id",
+                        "name": "id",
+                        "in": "path",
+                        "required": true
+                    },
+                    {
+                        "type": "string",
+                        "description": "path params for param2",
+                        "name": "param2",
+                        "in": "path",
+                        "required": true
+                    },
+                    {
+                        "type": "string",
+                        "description": "query for q",
+                        "name": "q",
+                        "in": "query"
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "OK",
+                        "schema": {
+                            "$ref": "#/definitions/handlers.PingWithParam"
+                        }
+                    }
+                }
+            }
+        }
+    },
+    "definitions": {
+        "handlers.PingWithParam": {
+            "type": "object",
+            "properties": {
+                "id": {
+                    "type": "integer",
+                    "example": 1
+                },
+                "param2": {
+                    "type": "string",
+                    "example": "yusuf"
+                },
+                "q": {
+                    "type": "string",
+                    "example": "yusufgg"
+                }
+            }
+        }
+    }
+}
