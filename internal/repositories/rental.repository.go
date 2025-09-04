@@ -51,7 +51,7 @@ func (r *RentalRepository) NewRental(reqContext context.Context, body models.Ren
 		log.Println("Scan Error, ", err.Error())
 		return models.Rental{}, err
 	}
-	return models.Rental{}, nil
+	return newRental, nil
 }
 
 func (r *RentalRepository) UpdateRental(reqContext context.Context, body models.Rental) (models.Rental, error) {
@@ -76,5 +76,5 @@ func (r *RentalRepository) UpdateRental(reqContext context.Context, body models.
 		return models.Rental{}, err
 	}
 
-	return models.Rental{}, nil
+	return newRental, nil
 }
