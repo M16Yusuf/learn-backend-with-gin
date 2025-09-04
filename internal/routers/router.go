@@ -7,6 +7,10 @@ import (
 	"github.com/jackc/pgx/v5/pgxpool"
 	"github.com/m16yusuf/belajar-gin/internal/middlewares"
 	"github.com/m16yusuf/belajar-gin/internal/models"
+
+	docs "github.com/m16yusuf/belajar-gin/docs"
+	swaggerfiles "github.com/swaggo/files"
+	ginSwagger "github.com/swaggo/gin-swagger"
 )
 
 func InitRouter(db *pgxpool.Pool) *gin.Engine {
@@ -14,6 +18,10 @@ func InitRouter(db *pgxpool.Pool) *gin.Engine {
 	router := gin.Default()
 	router.Use(middlewares.MyLogger)
 	router.Use(middlewares.CORSMiddleware)
+
+	// swaggo config
+	docs.SwaggerInfo.BasePath = "/"
+	router.GET("/swagger/*any", ginSwagger.WrapHandler(swaggerfiles.Handler))
 
 	// setup routing
 	InitPingRouter(router)

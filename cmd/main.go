@@ -8,6 +8,10 @@ import (
 	"github.com/m16yusuf/belajar-gin/internal/routers"
 )
 
+// @title	KODA 3 GIN
+// @version 1.0
+// @description   Restful API created using gin for koda batch 3
+// @host localhost:8080
 func main() {
 	// manual load ENV
 	if err := godotenv.Load(); err != nil {

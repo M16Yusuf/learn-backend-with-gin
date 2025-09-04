@@ -14,6 +14,11 @@ func NewPingHandler() *PingHandler {
 	return &PingHandler{}
 }
 
+// GetPing
+// @tags 		ping
+// @router 	/ping [GET]
+// @Param		X-Request-ID 	header 	string 	true 	"Header for send id"
+// @Param		Content-Type 	header 	string 	true 	"Header for .."
 func (p *PingHandler) GetPing(ctx *gin.Context) {
 	requestID := ctx.GetHeader("X-Request-ID")
 	contentType := ctx.GetHeader("Content-Type")
@@ -24,6 +29,20 @@ func (p *PingHandler) GetPing(ctx *gin.Context) {
 	})
 }
 
+type PingWithParam struct {
+	Id     int    `example:"1"`
+	Param2 string `example:"yusuf"`
+	Q      string `example:"yusufgg"`
+}
+
+// GetPingWithParam
+// @tags 		ping
+// @router 	/ping/:id/:param2 [GET]
+// @Param		id			path		integer true 	"path params for id"
+// @Param		param2	path		string 	true 	"path params for param2"
+// @Param		q				query		string 	false	"query for q"
+// @produce json
+// @success 200 {object} PingWithParam
 func (p *PingHandler) GetPingWithParam(ctx *gin.Context) {
 	pingID := ctx.Param("id")
 	param2 := ctx.Param("param2")
