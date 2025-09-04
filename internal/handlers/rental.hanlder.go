@@ -91,9 +91,11 @@ func (r *RentalHandler) PatchRental(ctx *gin.Context) {
 			"errors":  err.Error(),
 			"success": false,
 		})
+		return
 	}
 
-	newRental, err := r.renRepo.UpdateRental(ctx.Request.Context(), body)
+	paramId := ctx.Param("id")
+	newRental, err := r.renRepo.UpdateRental(ctx.Request.Context(), body, paramId)
 	if err != nil {
 		ctx.JSON(http.StatusInternalServerError, gin.H{
 			"success": false,

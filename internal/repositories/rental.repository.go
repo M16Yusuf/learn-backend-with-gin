@@ -54,20 +54,32 @@ func (r *RentalRepository) NewRental(reqContext context.Context, body models.Ren
 	return newRental, nil
 }
 
-func (r *RentalRepository) UpdateRental(reqContext context.Context, body models.Rental) (models.Rental, error) {
+func (r *RentalRepository) UpdateRental(reqContext context.Context, body models.Rental, paramid string) (models.Rental, error) {
 	// query dan pengecekan apa saja yang akan dirubah
+	values := []any{}
 	sql := "UPDATE rentals SET updated_at=CURRENT_TIMESTAMP "
 	if body.Image != "" {
-		sql += ", image='" + body.Image + "'"
+		idx := strconv.Itoa(len(values) + 1)
+		sql += ", image=$" + idx + ""
+		values = append(values, body.Image)
 	}
 	if body.Name != "" {
-		sql += ", rentals_name='" + body.Name + "'"
+		idx := strconv.Itoa(len(values) + 1)
+		sql += ", rentals_name=$" + idx + ""
+		values = append(values, body.Name)
 	}
 	if body.User_id != 0 {
-		sql += ", user_id=" + strconv.Itoa(body.User_id) + ""
+		idx := strconv.Itoa(len(values) + 1)
+		sql += ", user_id=$" + idx + ""
+		values = append(values, body.User_id)
 	}
-	sql += " WHERE id=$1 RETURNING id, image, rentals_name, user_id, created_at, updated_at "
-	values := []any{body.Id}
+
+	idx := strconv.Itoa(len(values) + 1)
+	values = append(values, paramid)
+
+	log.Println(sql)
+	log.Println(values...)
+	sql += " WHERE id=$" + idx + " RETURNING id, image, rentals_name, user_id, created_at, updated_at "
 
 	// masukan data hasil returning query ke dalam model rental yang baru
 	var newRental models.Rental

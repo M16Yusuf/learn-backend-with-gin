@@ -14,5 +14,5 @@ func InitRentalRouter(router *gin.Engine, db *pgxpool.Pool) {
 
 	rentalRouter.GET("", rh.GetRental)
 	rentalRouter.POST("", rh.PostRental)
-	rentalRouter.PATCH("", rh.PatchRental)
+	rentalRouter.PATCH("/:id", rh.PatchRental)
 }
